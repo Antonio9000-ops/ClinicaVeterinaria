@@ -19,14 +19,25 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                // Deshabilitar CSRF que no es necesario para una API RESTful sin estado
                 .csrf(AbstractHttpConfigurer::disable)
-                // Definir las reglas de autorización
                 .authorizeHttpRequests(authz -> authz
-                        // Permitir todas las peticiones que empiecen con /auth/
-                        .requestMatchers("/auth/**").permitAll()
-                        // Cualquier otra petición requiere autenticación
+                        // PERMITIR acceso público a estas URLs para la web y los estilos
+                        .requestMatchers("/login", "/register", "/auth/register-web").permitAll()
+                        // PERMITIR acceso a la API de registro (si aún la quieres pública)
+                        .requestMatchers("/auth/register").permitAll()
+                        // CUALQUIER OTRA petición requiere autenticación
                         .anyRequest().authenticated()
+                )
+                // CONFIGURAR el formulario de login
+                .formLogin(form -> form
+                        .loginPage("/login") // La página de login personalizada está en /login
+                        .defaultSuccessUrl("/home", true) // Redirigir a /home después de un login exitoso
+                        .permitAll() // Permitir a todos ver la página de login
+                )
+                // CONFIGURAR el logout
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/login?logout") // Redirigir a la página de login después de cerrar sesión
+                        .permitAll()
                 );
 
         return http.build();
