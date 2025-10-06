@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.veterinaria.demo.PetcareApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.141 s -- in com.veterinaria.demo.PetcareApplicationTests
