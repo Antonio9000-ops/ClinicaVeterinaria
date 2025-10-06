@@ -36,6 +36,9 @@ Dentro del paquete entity, esta clase mapea la tabla propietarios de la base de 
 ## Mascota.java
 Clase que mapea la tabla mascota y tiene realcion con el propietario 
 
+# Estructura base del proyecto
+![Logo de la Clinica Veterinaria](proyecto/demo/src/main/resources/images/EstructuraREADME.png)
+
 ## Requerimientos Funcionales
 - Registro y Login
 - Reservas
