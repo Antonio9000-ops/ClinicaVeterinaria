@@ -1,9 +1,6 @@
 # Archivos de construcción de Maven
 /target/
-
 *.log
-
 .idea/
 *.iml
-
 .DS_Store
