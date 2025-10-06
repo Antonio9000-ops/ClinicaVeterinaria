@@ -1,8 +1,10 @@
 package com.veterinaria.web.controller;
 
-import com.veterinaria.domain.service.UserDetailsServiceImp;
+import com.veterinaria.persistence.crud.PropietarioCrudRepository;
 import com.veterinaria.persistence.entity.Propietario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,26 +13,22 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     @Autowired
-    private UserDetailsServiceImp userDetailsService;
+    private PropietarioCrudRepository propietarioCrudRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    // Endpoint para registrar un nuevo propietario
     @PostMapping("/register")
-    public Propietario registrarPropietario(@RequestBody Propietario propietario) {
+    public ResponseEntity<Propietario> registrarPropietario(@RequestBody Propietario propietario) {
+        // 1. Cifrar la contraseña antes de guardarla
         propietario.setPassword(passwordEncoder.encode(propietario.getPassword()));
-        // Aquí deberías guardar el propietario en la base de datos
-        // a través de un servicio que use PropietarioCrudRepository
-        return propietario; // Devuelve el propietario guardado
+
+        // 2. Guardar el nuevo propietario en la base de datos
+        Propietario propietarioGuardado = propietarioCrudRepository.save(propietario);
+
+        // 3. Devolver el propietario guardado con un código de estado 201 Created
+        return new ResponseEntity<>(propietarioGuardado, HttpStatus.CREATED);
     }
 
-    // Endpoint para el login (Spring Security lo maneja, pero puedes tener uno para generar tokens)
-    @PostMapping("/login")
-    public String login() {
-        // La autenticación la gestiona Spring Security.
-        // Si llega aquí, es que el login fue exitoso.
-        // En un futuro, aquí generarías un JWT (JSON Web Token).
-        return "Login exitoso";
-    }
+    // El endpoint de login no es necesario aquí, Spring Security lo maneja internamente
 }
