@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+// Cambiamos a @Controller porque ahora manejamos vistas (redirecciones)
+// y respuestas de API (@ResponseBody)
+@Controller
 @RequestMapping("/auth")
 public class AuthController {
 
@@ -18,17 +21,29 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * Endpoint para la API (ej. Postman).
+     * Devuelve datos JSON en el cuerpo de la respuesta.
+     */
     @PostMapping("/register")
+    @ResponseBody // Indica que la respuesta debe ser JSON, no el nombre de una vista
     public ResponseEntity<Propietario> registrarPropietario(@RequestBody Propietario propietario) {
-        // 1. Cifrar la contraseña antes de guardarla
         propietario.setPassword(passwordEncoder.encode(propietario.getPassword()));
-
-        // 2. Guardar el nuevo propietario en la base de datos
         Propietario propietarioGuardado = propietarioCrudRepository.save(propietario);
-
-        // 3. Devolver el propietario guardado con un código de estado 201 Created
         return new ResponseEntity<>(propietarioGuardado, HttpStatus.CREATED);
     }
 
-    // El endpoint de login no es necesario aquí, Spring Security lo maneja internamente
+    /**
+     * Endpoint para el formulario web.
+     * Procesa los datos y redirige a otra página.
+     */
+    @PostMapping("/register-web")
+    public String registrarPropietarioDesdeWeb(@ModelAttribute Propietario propietario) {
+        // La lógica es la misma: cifrar y guardar
+        propietario.setPassword(passwordEncoder.encode(propietario.getPassword()));
+        propietarioCrudRepository.save(propietario);
+
+        // Redirigimos al usuario a la página de login con un parámetro de éxito
+        return "redirect:/login?success";
+    }
 }

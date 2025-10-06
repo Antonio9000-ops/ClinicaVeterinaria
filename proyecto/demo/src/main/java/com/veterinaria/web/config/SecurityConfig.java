@@ -4,12 +4,27 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity; // Importa esta clase
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableWebSecurity // Anotación importante para forzar la configuración
 public class SecurityConfig {
+
+    /**
+     * Este es un constructor. El código aquí dentro se ejecuta cuando Spring crea
+     * esta clase de configuración. Lo usamos para imprimir un mensaje y saber si
+     * Spring está usando este archivo.
+     */
+    public SecurityConfig() {
+        System.out.println();
+        System.out.println("*****************************************************");
+        System.out.println("****** MI CONFIGURACIÓN DE SEGURIDAD SE CARGÓ *******");
+        System.out.println("*****************************************************");
+        System.out.println();
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -21,7 +36,6 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authz -> authz
-                        // PERMITIR acceso público a estas URLs para la web y los estilos
                         .requestMatchers("/login", "/register", "/auth/register-web").permitAll()
                         // PERMITIR acceso a la API de registro (si aún la quieres pública)
                         .requestMatchers("/auth/register").permitAll()
