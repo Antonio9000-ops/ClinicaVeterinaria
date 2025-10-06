@@ -68,8 +68,7 @@ public class Propietario {
     }
 
 
-
     @OneToMany(mappedBy = "propietario") //Indica la relacion de uno a muchos. un propietario puede tener muchas mascotas
-    private List<Mascotas> mascotas;
+    private List<Mascota> mascotas;
 
 }
