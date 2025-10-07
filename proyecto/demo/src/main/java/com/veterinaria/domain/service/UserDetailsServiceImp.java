@@ -12,10 +12,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailsServiceImp implements UserDetailsService {
 
+    //Este servicio se encarga de recuperar los datos del usuario y validar las credenciales
+
     @Autowired
     private PropietarioCrudRepository propietarioCrudRepository;
 
     @Override
+    //busca el usuario en la base de datos por medio de su correo
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Propietario propietario = propietarioCrudRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));

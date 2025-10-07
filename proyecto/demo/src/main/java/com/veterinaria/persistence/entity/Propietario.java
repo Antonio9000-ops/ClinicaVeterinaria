@@ -18,11 +18,6 @@ public class Propietario {
     private String email;
     private String password;
 
-    // --- INICIO DE LA CORRECCIÓN ---
-    // Estos son los métodos que faltaban.
-    // Thymeleaf necesita getNombre() para leer el valor del campo 'nombre'
-    // y setNombre() para asignarle un valor cuando se envía el formulario.
-    // La ausencia de estos métodos causaba el error "NotReadablePropertyException".
 
     public String getNombre() {
         return nombre;

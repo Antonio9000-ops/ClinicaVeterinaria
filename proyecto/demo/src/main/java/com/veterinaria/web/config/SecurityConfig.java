@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity; // Importa esta clase
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -13,18 +13,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity // Anotación importante para forzar la configuración
 public class SecurityConfig {
 
-    /**
-     * Este es un constructor. El código aquí dentro se ejecuta cuando Spring crea
-     * esta clase de configuración. Lo usamos para imprimir un mensaje y saber si
-     * Spring está usando este archivo.
-     */
-    public SecurityConfig() {
-        System.out.println();
-        System.out.println("*****************************************************");
-        System.out.println("****** MI CONFIGURACIÓN DE SEGURIDAD SE CARGÓ *******");
-        System.out.println("*****************************************************");
-        System.out.println();
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
