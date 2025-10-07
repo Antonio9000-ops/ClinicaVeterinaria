@@ -1,7 +1,8 @@
-package com.veterinaria.persistence.crud;
+package com.veterinaria.demo.persistence.crud;
 
-import com.veterinaria.persistence.entity.Mascota;
 import org.springframework.data.repository.CrudRepository;
+
+import com.veterinaria.demo.persistence.entity.Mascota;
 
 public interface MascotaCrudRepository extends CrudRepository<Mascota, Integer> {
 }

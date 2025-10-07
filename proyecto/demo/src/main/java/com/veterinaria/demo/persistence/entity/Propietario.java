@@ -1,4 +1,4 @@
-package com.veterinaria.persistence.entity;
+package com.veterinaria.demo.persistence.entity;
 
 import jakarta.persistence.*;
 import java.util.List;

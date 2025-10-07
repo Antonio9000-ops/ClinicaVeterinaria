@@ -1,9 +1,10 @@
-package com.veterinaria.web.controller;
+package com.veterinaria.demo.web.controller;
 
-import com.veterinaria.persistence.entity.Propietario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.veterinaria.demo.persistence.entity.Propietario;
 
 @Controller
 public class ViewController {

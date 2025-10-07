@@ -1,13 +1,14 @@
-package com.veterinaria.web.controller;
+package com.veterinaria.demo.web.controller;
 
-import com.veterinaria.persistence.crud.PropietarioCrudRepository;
-import com.veterinaria.persistence.entity.Propietario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import com.veterinaria.demo.persistence.crud.PropietarioCrudRepository;
+import com.veterinaria.demo.persistence.entity.Propietario;
 
 // Cambiamos a @Controller porque ahora manejamos vistas (redirecciones)
 // y respuestas de API (@ResponseBody)

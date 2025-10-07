@@ -1,13 +1,14 @@
-package com.veterinaria.domain.service;
+package com.veterinaria.demo.domain.service;
 
-import com.veterinaria.persistence.crud.PropietarioCrudRepository;
-import com.veterinaria.persistence.entity.Propietario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import com.veterinaria.demo.persistence.crud.PropietarioCrudRepository;
+import com.veterinaria.demo.persistence.entity.Propietario;
 
 @Service
 public class UserDetailsServiceImp implements UserDetailsService {

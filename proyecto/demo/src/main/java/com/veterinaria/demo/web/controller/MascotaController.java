@@ -1,7 +1,8 @@
-package com.veterinaria.web.controller;
+package com.veterinaria.demo.web.controller;
 
-import com.veterinaria.persistence.entity.Mascota;
 import org.springframework.web.bind.annotation.*;
+
+import com.veterinaria.demo.persistence.entity.Mascota;
 
 @RestController
 @RequestMapping("/mascotas")
