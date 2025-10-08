@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <title>iSTUDIO - Interior Design Website Template Free</title>
@@ -9,6 +9,8 @@
     <meta content="" name="description">
 
     <link th:href="@{/img/favicon.ico}" rel="icon">
+
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,6 +34,7 @@
         <span class="sr-only">Loading...</span>
     </div>
 </div>
+<!-- Navbar Start -->
 <div class="container-fluid sticky-top">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light border-bottom border-2 border-white">
@@ -44,7 +47,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto">
-                    <a th:href="@{/}" class="nav-item nav-link active">Home</a>
+                    <a th:href="@{/index}" class="nav-item nav-link active">Home</a>
                     <a th:href="@{/about}" class="nav-item nav-link">About</a>
                     <a th:href="@{/service}" class="nav-item nav-link">Services</a>
                     <a th:href="@{/project}" class="nav-item nav-link">Projects</a>
@@ -58,14 +61,47 @@
                         </div>
                     </div>
                     <a th:href="@{/contact}" class="nav-item nav-link">Contact</a>
+
+                    <!-- Lógica de autenticación en la Navbar -->
+                    <!-- Bloque si el usuario NO está autenticado: Muestra Login -->
+                    <a th:href="@{/login}" class="nav-item nav-link" th:unless="${#authorization.expression('isAuthenticated()')}">
+                        Login
+                    </a>
+
+                    <!-- Bloque si el usuario SÍ está autenticado: Muestra Logout como un formulario POST -->
+                    <form th:if="${#authorization.expression('isAuthenticated()')}" th:action="@{/logout}" method="post" class="nav-item nav-link p-0">
+                        <button type="submit" class="btn btn-link nav-item nav-link border-0" style="color: inherit; text-decoration: none;">
+                            Logout
+                        </button>
+                    </form>
+
                 </div>
             </div>
         </nav>
     </div>
 </div>
+<!-- Navbar End -->
+
+
+<!-- Hero Start -->
 <div class="container-fluid pb-5 hero-header bg-light mb-5">
     <div class="container py-5">
-        <div class="row g-5 align-items-center mb-5">
+
+        <!-- ============================================== -->
+        <!-- === BLOQUE 1: CONTENIDO SI ESTÁS LOGEADO === -->
+        <div class="row g-5 align-items-center mb-5" th:if="${#authorization.expression('isAuthenticated()')}">
+            <div class="col-12 text-center" style="padding: 100px 0;">
+                <h1 class="display-3 mb-4 animated slideInDown">¡Bienvenido a la Clínica Veterinaria!</h1>
+                <p class="lead mb-4">Has iniciado sesión correctamente como **<span th:text="${#authentication.name}">Usuario</span>**. Ahora tienes acceso al contenido de tu cuenta.</p>
+
+            </div>
+        </div>
+        <!-- ============================================== -->
+
+
+        <!-- ============================================== -->
+        <!-- === BLOQUE 2: CONTENIDO SI NO ESTÁS LOGEADO (EL HERO ORIGINAL) === -->
+        <div class="row g-5 align-items-center mb-5" th:unless="${#authorization.expression('isAuthenticated()')}">
             <div class="col-lg-6">
                 <h1 class="display-1 mb-4 animated slideInRight">We Make Your <span class="text-primary">Home</span>
                     Better</h1>
@@ -80,6 +116,10 @@
                 </div>
             </div>
         </div>
+        <!-- ============================================== -->
+
+
+        <!-- Elementos debajo del Hero (ESTOS SE MUESTRAN SIEMPRE) -->
         <div class="row g-5 animated fadeIn">
             <div class="col-md-6 col-lg-3">
                 <div class="d-flex align-items-center">

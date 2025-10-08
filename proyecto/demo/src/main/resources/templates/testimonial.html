@@ -32,6 +32,8 @@
         <span class="sr-only">Loading...</span>
     </div>
 </div>
+
+
 <div class="container-fluid sticky-top">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light border-bottom border-2 border-white">
@@ -44,25 +46,41 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto">
-                    <a th:href="@{/}" class="nav-item nav-link">Home</a>
+                    <a th:href="@{/}" class="nav-item nav-link active">Home</a>
                     <a th:href="@{/about}" class="nav-item nav-link">About</a>
                     <a th:href="@{/service}" class="nav-item nav-link">Services</a>
                     <a th:href="@{/project}" class="nav-item nav-link">Projects</a>
                     <div class="nav-item dropdown">
-                        <a href="#!" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
+                        <a href="#!" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu bg-light mt-2">
                             <a th:href="@{/feature}" class="dropdown-item">Features</a>
                             <a th:href="@{/team}" class="dropdown-item">Our Team</a>
-                            <a th:href="@{/testimonial}" class="dropdown-item active">Testimonial</a>
+                            <a th:href="@{/testimonial}" class="dropdown-item">Testimonial</a>
                             <a th:href="@{/404}" class="dropdown-item">404 Page</a>
                         </div>
                     </div>
                     <a th:href="@{/contact}" class="nav-item nav-link">Contact</a>
+
+                    <!-- Lógica de autenticación en la Navbar -->
+                    <!-- Bloque si el usuario NO está autenticado: Muestra Login -->
+                    <a th:href="@{/login}" class="nav-item nav-link" th:unless="${#authorization.expression('isAuthenticated()')}">
+                        Login
+                    </a>
+
+                    <!-- Bloque si el usuario SÍ está autenticado: Muestra Logout como un formulario POST -->
+                    <form th:if="${#authorization.expression('isAuthenticated()')}" th:action="@{/logout}" method="post" class="nav-item nav-link p-0">
+                        <button type="submit" class="btn btn-link nav-item nav-link border-0" style="color: inherit; text-decoration: none;">
+                            Logout
+                        </button>
+                    </form>
+
                 </div>
             </div>
         </nav>
     </div>
 </div>
+
+
 <div class="container-fluid pb-5 bg-primary hero-header">
     <div class="container py-5">
         <div class="row g-3 align-items-center">
