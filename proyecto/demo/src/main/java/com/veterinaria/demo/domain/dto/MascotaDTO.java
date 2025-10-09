@@ -1,35 +1,16 @@
-package com.veterinaria.demo.persistence.entity;
-import jakarta.persistence.*;
+package com.veterinaria.demo.domain.dto;
+
 import java.time.LocalDate;
 
-@Entity
-@Table (name="Mascotas")
-public class Mascota {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_mascota")
+public class MascotaDTO {
     private Integer idMascota;
-
     private String nombre;
     private String especie;
     private String raza;
-
-    @Column(name="fecha_nacimiento")
     private LocalDate fechaNacimiento;
+    private Integer idPropietario; // Para saber a quién pertenece
 
-    @ManyToOne
-    @JoinColumn(name = "id_propietario")
-    private Propietario propietario;
-
-    // --- Getters y Setters existentes ---
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    // --- Getters y Setters ---
 
     public Integer getIdMascota() {
         return idMascota;
@@ -37,6 +18,14 @@ public class Mascota {
 
     public void setIdMascota(Integer idMascota) {
         this.idMascota = idMascota;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getEspecie() {
@@ -63,13 +52,11 @@ public class Mascota {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-
-    public Propietario getPropietario() {
-        return propietario;
+    public Integer getIdPropietario() {
+        return idPropietario;
     }
 
-    public void setPropietario(Propietario propietario) {
-        this.propietario = propietario;
+    public void setIdPropietario(Integer idPropietario) {
+        this.idPropietario = idPropietario;
     }
-
 }
