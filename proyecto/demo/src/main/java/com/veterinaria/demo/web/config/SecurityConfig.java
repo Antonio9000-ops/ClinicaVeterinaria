@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity // Anotación importante para forzar la configuración
@@ -22,48 +21,24 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        // Rutas que deben ser públicas (visibles sin iniciar sesión)
-        final String[] publicUrls = new String[] {
-                // Recursos estáticos (diseño)
-                "/css/**", "/js/**", "/img/**", "/lib/**", "/images/**", "/scss/**",
-
-                // Vistas públicas mapeadas en ViewController
-                "/", "/index", "/about", "/contact", "/feature", "/project", "/service", "/team", "/testimonial", "/404",
-
-                // Autenticación
-                "/login", "/register", "/auth/register-web", "/auth/register"
-        };
-
-
         http
                 .csrf(AbstractHttpConfigurer::disable)
-
-                // INICIO DEL ÚNICO BLOQUE DE AUTORIZACIÓN
                 .authorizeHttpRequests(authz -> authz
-
-                        // 1. Permite acceso a TODAS las URLs listadas en 'publicUrls' (incluyendo / y /index)
-                        .requestMatchers(publicUrls).permitAll()
-
-                        // 2. CUALQUIER OTRA petición SÍ requiere autenticación (siempre al final)
+                        .requestMatchers("/login", "/register", "/auth/register-web").permitAll()
+                        // PERMITIR acceso a la API de registro (si aún la quieres pública)
+                        .requestMatchers("/auth/register").permitAll()
+                        // CUALQUIER OTRA petición requiere autenticación
                         .anyRequest().authenticated()
                 )
-                // FIN DEL ÚNICO BLOQUE DE AUTORIZACIÓN
-
                 // CONFIGURAR el formulario de login
                 .formLogin(form -> form
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/index", true) // Redirigir a /index después del login exitoso
-                        .permitAll()
+                        .loginPage("/login") // La página de login personalizada está en /login
+                        .defaultSuccessUrl("/home", true) // Redirigir a /home después de un login exitoso
+                        .permitAll() // Permitir a todos ver la página de login
                 )
                 // CONFIGURAR el logout
                 .logout(logout -> logout
-                        // Usamos AntPathRequestMatcher para la ruta de logout
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
-                        // *** CORRECCIÓN: Redirigir al index (ruta raíz) después de cerrar sesión ***
-                        .logoutSuccessUrl("/")
-                        // Configuraciones adicionales de seguridad en el logout
-                        .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID")
+                        .logoutSuccessUrl("/login?logout") // Redirigir a la página de login después de cerrar sesión
                         .permitAll()
                 );
 

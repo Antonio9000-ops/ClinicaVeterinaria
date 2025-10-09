@@ -8,14 +8,20 @@ public class Mascota {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_mascota")
-
     private Integer idMascota;
+
     private String nombre;
     private String especie;
     private String raza;
 
     @Column(name="fecha_nacimiento")
     private LocalDate fechaNacimiento;
+
+    @ManyToOne
+    @JoinColumn(name = "id_propietario")
+    private Propietario propietario;
+
+    // --- Getters y Setters existentes ---
 
     public String getNombre() {
         return nombre;
@@ -57,7 +63,13 @@ public class Mascota {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    @ManyToOne  //De muchos a uno.
-    @JoinColumn(name="id_propietario", insertable = false, updatable = false)  //une la tabla proietario con la tabla mascotas
-    private Propietario propietario;
+
+    public Propietario getPropietario() {
+        return propietario;
+    }
+
+    public void setPropietario(Propietario propietario) {
+        this.propietario = propietario;
+    }
+
 }

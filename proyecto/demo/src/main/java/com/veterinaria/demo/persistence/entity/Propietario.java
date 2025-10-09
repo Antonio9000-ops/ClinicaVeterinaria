@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity //clase que es una entidad y debe ser mapeada en la base de datos
-@Table(name="propietarios") //especifica a que tabla corresponde en la base de datos
+@Table(name = "Propietarios") //especifica a que tabla corresponde en la base de datos
 public class Propietario {
     @Id //clave primaria de la tabla
     @GeneratedValue(strategy = GenerationType.IDENTITY) //esto configura como se genera la clave primaria y indica que se autoincrementa
