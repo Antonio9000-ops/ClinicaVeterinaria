@@ -1,6 +1,6 @@
 # ClinicaVeterinaria
 
-Crear estructura del Proyecto1
+Crear estructura del Proyecto
 
 usuario: user
 contraseña: "cambia cada vez que se inicia"
