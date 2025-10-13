@@ -36,12 +36,15 @@ public class SecurityConfig {
                                 .authorizeHttpRequests(auth -> auth
                                                 // Rutas públicas - sin autenticación
                                                 .requestMatchers("/", "/login", "/index.html", "/home", "/welcome",
+                                                                "/navbar",
+                                                                "navbar.html",
                                                                 "/api/mascotas/**",
                                                                 "/register",
                                                                 "/login.html", "/*.css", "/*.js", "/*.ico",
                                                                 "/css/**", "/js/**", "/images/**", "/inicio",
                                                                 "inicio.html", "mascotas.html", "/mascotas",
-                                                                "/ver-mascotas",
+                                                                "/ver-mascotas", "/contact", "contact.html",
+                                                                "/contact-fake",
                                                                 "/static/**", "/error")
                                                 .permitAll()
                                                 .requestMatchers("/auth/**").permitAll()

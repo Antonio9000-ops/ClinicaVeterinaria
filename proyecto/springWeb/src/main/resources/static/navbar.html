@@ -1,0 +1,127 @@
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="/inicio">🐾 PetCare</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="#">Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link" href="/contact">Contactanos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Servicios</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Promociones</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Ubícanos</a></li>
+          <li class="nav-item dropdown ms-3">
+            <button class="btn dropdown-toggle" data-bs-toggle="dropdown">Cuenta</button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#" onclick="abrirModalCuenta()">Actualizar Cuenta</a></li>
+              <li><a class="dropdown-item text-danger" href="#" onclick="logout()">Cerrar sesión</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Modal Actualizar Cuenta -->
+<div class="modal fade" id="modalCuenta" tabindex="-1" aria-labelledby="modalCuentaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalCuentaLabel">Actualizar Cuenta</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formActualizarCuenta">
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" id="nombre" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="apellido" class="form-label">Apellido</label>
+            <input type="text" id="apellido" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="telefono" class="form-label">Teléfono</label>
+            <input type="tel" id="telefono" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label for="direccion" class="form-label">Dirección</label>
+            <input type="text" id="direccion" class="form-control">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="guardarCambios()">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Estilos del Navbar -->
+<style>
+  .navbar {
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 1.2rem 2rem;
+    position: relative;
+    z-index: 1000;
+  }
+  .navbar .container {
+    overflow: visible !important;
+    position: relative;
+  }
+  .navbar-brand {
+    font-weight: 700;
+    color: #007bff !important;
+  }
+  .nav-link {
+    color: #333 !important;
+    font-weight: 500;
+  }
+  .nav-link:hover {
+    color: #007bff !important;
+  }
+  .btn.dropdown-toggle {
+    background-color: #007bff;
+    color: #fff !important;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    transition: background-color 0.2s ease;
+  }
+  
+  .btn.dropdown-toggle:hover,
+  .btn.dropdown-toggle:focus,
+  .btn.dropdown-toggle.show {
+    background-color: #0056b3 !important;
+  }
+  .dropdown-menu {
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    margin-top: 8px !important;
+    min-width: 160px;
+    border: none;
+    animation: fadeIn 0.15s ease;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script src="navbar.js"></script>
