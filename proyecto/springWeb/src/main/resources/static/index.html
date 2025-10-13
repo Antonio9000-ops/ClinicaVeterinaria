@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PetCare - Veterinaria</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="container vh-100">
+      <div class="row h-100 justify-content-center align-items-center">  
+        <div class="col-12 d-flex align-items-center justify-content-center">
+          <div class="w-100 d-flex justify-content-center">
+            <div class="mx-auto" style="max-width: 400px; width: 100%;">
+              <!-- Login Form -->
+              <div id="loginForm" class="form-container">
+                <div class="text-center mb-4">
+                  <i class="fas fa-paw text-primary fa-2x mb-3"></i>
+                  <h2 class="fw-bold">Iniciar Sesión</h2>
+                  <p class="text-muted">Bienvenido de nuevo a PetCare</p>
+                </div>
+
+                <form id="loginFormElement">
+                  <div class="mb-3">
+                    <label for="loginEmail" class="form-label">Email</label>
+                    <div class="input-group">
+                      <span class="input-group-text"
+                        ><i class="fas fa-envelope"></i
+                      ></span>
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="loginEmail"
+                        placeholder="tu@email.com"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="loginPassword" class="form-label"
+                      >Contraseña</label
+                    >
+                    <div class="input-group">
+                      <span class="input-group-text"
+                        ><i class="fas fa-lock"></i
+                      ></span>
+                      <input
+                        type="password"
+                        class="form-control"
+                        id="loginPassword"
+                        placeholder="Tu contraseña"
+                        required
+                      />
+                      <button
+                        class="btn btn-outline-secondary"
+                        type="button"
+                        id="toggleLoginPassword"
+                      >
+                        <i class="fas fa-eye"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="mb-3 form-check">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="rememberMe"
+                    />
+                    <label class="form-check-label" for="rememberMe"
+                      >Recordarme</label
+                    >
+                  </div>
+
+                  <button type="submit" class="btn btn-primary w-100 py-2 mb-3">
+                    <i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión
+                  </button>
+
+                  <!-- Botones sociales decorativos -->
+                  <div class="text-center mb-3">
+                    <p class="text-muted">O continuar con</p>
+                    <div class="d-flex gap-2 justify-content-center">
+                      <button
+                        type="button"
+                        class="btn btn-outline-danger btn-sm"
+                        disabled
+                      >
+                        <i class="fab fa-google me-2"></i>Google
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-outline-primary btn-sm"
+                        disabled
+                      >
+                        <i class="fab fa-discord me-2"></i>Discord
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="text-center">
+                    <a
+                      href="#"
+                      class="text-decoration-none"
+                      onclick="showForm('forgotForm')"
+                    >
+                      ¿Olvidaste tu contraseña?
+                    </a>
+                  </div>
+                </form>
+
+                <div class="text-center mt-4">
+                  <p class="text-muted">
+                    ¿No tienes cuenta?
+                    <a
+                      href="#"
+                      class="text-decoration-none fw-bold"
+                      onclick="showForm('registerForm')"
+                    >
+                      Regístrate aquí
+                    </a>
+                  </p>
+                </div>
+              </div>
+
+              <!-- Register Form -->
+              <div id="registerForm" class="form-container" style="display: none">
+                <div class="text-center mb-4">
+                  
+                  <h2 class="fw-bold">Crear Cuenta</h2>
+                  <p class="text-muted">Únete a la familia PetCare</p>
+                </div>
+
+                <form id="registerFormElement">
+                  <div class="mb-3">
+                    <label for="registerName" class="form-label"
+                      >Nombre Completo</label
+                    >
+                    <div class="input-group">
+                      <span class="input-group-text"
+                        ><i class="fas fa-user"></i
+                      ></span>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="registerName"
+                        placeholder="Tu nombre completo"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="registerEmail" class="form-label">Email</label>
+                    <div class="input-group">
+                      <span class="input-group-text"
+                        ><i class="fas fa-envelope"></i
+                      ></span>
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="registerEmail"
+                        placeholder="tu@email.com"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="registerPassword" class="form-label"
+                      >Contraseña</label
+                    >
+                    <div class="input-group">
+                      <span class="input-group-text"
+                        ><i class="fas fa-lock"></i
+                      ></span>
+                      <input
+                        type="password"
+                        class="form-control"
+                        id="registerPassword"
+                        placeholder="Crea una contraseña"
+                        required
+                      />
+                      <button
+                        class="btn btn-outline-secondary"
+                        type="button"
+                        id="toggleRegisterPassword"
+                      >
+                        <i class="fas fa-eye"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="registerRol" class="form-label"
+                      >Tipo de Usuario</label
+                    >
+                    <div class="input-group">
+                      <span class="input-group-text"
+                        ><i class="fas fa-user-tag"></i
+                      ></span>
+                      <select class="form-select" id="registerRol" required>
+                        <option value="">Selecciona tu rol...</option>
+                        <option value="DUEÑO">Dueño de Mascota</option>
+                        <option value="VETERINARIO">Veterinario</option>
+                        <option value="ASISTENTE">Asistente</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="mb-3 form-check">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="acceptTerms"
+                      required
+                    />
+                    <label class="form-check-label" for="acceptTerms">
+                      Acepto los términos y condiciones
+                    </label>
+                  </div>
+
+                  <button type="submit" class="btn btn-success w-100 py-2 mb-3">
+                    <i class="fas fa-user-plus me-2"></i>Crear Cuenta
+                  </button>
+
+                  <!-- Botones sociales decorativos -->
+                  <div class="text-center mb-3">
+                    <p class="text-muted">O registrarse con</p>
+                    <div class="d-flex gap-2 justify-content-center">
+                      <button
+                        type="button"
+                        class="btn btn-outline-danger btn-sm"
+                        disabled
+                      >
+                        <i class="fab fa-google me-2"></i>Google
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-outline-primary btn-sm"
+                        disabled
+                      >
+                        <i class="fab fa-discord me-2"></i>Discord
+                      </button>
+                    </div>
+                  </div>
+                </form>
+
+                <div class="text-center mt-4">
+                  <p class="text-muted">
+                    ¿Ya tienes cuenta?
+                    <a
+                      href="#"
+                      class="text-decoration-none fw-bold"
+                      onclick="showForm('loginForm')"
+                    >
+                      Inicia sesión aquí
+                    </a>
+                  </p>
+                </div>
+              </div>
+
+              <!-- Forgot Password Form -->
+              <div id="forgotForm" class="form-container" style="display: none">
+                <div class="text-center mb-4">
+                  <i class="fas fa-key text-warning fa-2x mb-3"></i>
+                  <h2 class="fw-bold">Recuperar Contraseña</h2>
+                  <p class="text-muted">
+                    Te enviaremos un enlace para resetear tu contraseña
+                  </p>
+                </div>
+
+                <form id="forgotFormElement">
+                  <div class="mb-3">
+                    <label for="forgotEmail" class="form-label">Email</label>
+                    <div class="input-group">
+                      <span class="input-group-text"
+                        ><i class="fas fa-envelope"></i
+                      ></span>
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="forgotEmail"
+                        placeholder="tu@email.com"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <button type="submit" class="btn btn-warning w-100 py-2 mb-3">
+                    <i class="fas fa-paper-plane me-2"></i>Enviar Enlace
+                  </button>
+                </form>
+
+                <div class="text-center mt-4">
+                  <a
+                    href="#"
+                    class="text-decoration-none fw-bold"
+                    onclick="showForm('loginForm')"
+                  >
+                    ← Volver al login
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>

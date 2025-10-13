@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PetCare - Dashboard</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+<style>
+  body {
+    background-color: #ffffff;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #333;
+  }
+
+  /* NAVBAR */
+  .navbar {
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 1.2rem 2rem;
+    position: relative;
+    z-index: 1000;
+  }
+
+  .navbar .container {
+    overflow: visible !important;
+    position: relative;
+  }
+
+  .navbar-brand {
+    font-weight: 700;
+    color: #007bff !important;
+  }
+
+  .nav-link {
+    color: #333 !important;
+    font-weight: 500;
+  }
+
+  .nav-link:hover {
+    color: #007bff !important;
+  }
+
+  /* ✅ BOTÓN "Cuenta" */
+  .btn.dropdown-toggle {
+    background-color: #007bff;
+    color: #fff !important;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .btn.dropdown-toggle:hover,
+  .btn.dropdown-toggle:focus,
+  .btn.dropdown-toggle.show {
+    background-color: #0056b3 !important;
+    color: #fff !important;
+    border: none;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  /* ✅ MENÚ desplegable (usando Bootstrap correctamente) */
+  .dropdown-menu {
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    margin-top: 8px !important;
+    min-width: 160px;
+    border: none;
+    animation: fadeIn 0.15s ease;
+  }
+
+  .dropdown-menu a {
+    color: #333;
+    font-weight: 500;
+  }
+
+  .dropdown-menu a:hover {
+    background-color: #f0f8ff;
+    color: #007bff;
+  }
+
+  /* Efecto suave de aparición */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* HERO */
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    height: 60vh;
+    overflow: hidden;
+    padding: 0 4.2rem;
+    background: linear-gradient(to right, #f6faff 55%, transparent 100%);
+    z-index: 1;
+  }
+
+  .hero-text {
+    flex: 1;
+    position: relative;
+    z-index: 2;
+    padding-right: 2.4rem;
+    max-width: 440px;
+  }
+
+  .hero-text h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #003366;
+    margin-bottom: 0.8rem;
+  }
+
+  .hero-text p {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.45;
+  }
+
+  .hero img {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 100%;
+    width: auto;
+    max-width: 52%;
+    object-fit: contain;
+    object-position: right center;
+    z-index: 1;
+    filter: brightness(1.03);
+  }
+
+  /* LÍNEA DESTACADO */
+  .divider {
+    text-align: center;
+    margin: 2rem 0;
+    position: relative;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background: #ccc;
+  }
+
+  .divider::before {
+    left: 0;
+  }
+
+  .divider::after {
+    right: 0;
+  }
+
+  .divider span {
+    background: #fff;
+    padding: 0 1rem;
+    color: #007bff;
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+
+  /* ICONOS */
+  .features {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 2rem 1rem;
+  }
+
+  .feature-card {
+    background-color: #ffffff;
+    color: #007bff;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1rem;
+    border: 2px solid #007bff;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .feature-card i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    background: #007bff;
+    color: white;
+    padding: 15px;
+    border-radius: 50%;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem 0;
+    border-top: 1px solid #eee;
+    color: #666;
+  }
+</style>
+
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="#">🐾 PetCare</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="#">Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Contactos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Servicios</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Promociones</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Ubícanos</a></li>
+          <li class="nav-item dropdown ms-3">
+            <button class="btn dropdown-toggle" data-bs-toggle="dropdown">Cuenta</button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#" onclick="abrirModalCuenta()">Actualizar Cuenta</a></li>
+              <li><a class="dropdown-item text-danger" href="#" onclick="logout()">Cerrar sesión</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Modal Actualizar Cuenta -->
+<div class="modal fade" id="modalCuenta" tabindex="-1" aria-labelledby="modalCuentaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalCuentaLabel">Actualizar Cuenta</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formActualizarCuenta">
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" id="nombre" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="apellido" class="form-label">Apellido</label>
+            <input type="text" id="apellido" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="telefono" class="form-label">Teléfono</label>
+            <input type="tel" id="telefono" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label for="direccion" class="form-label">Dirección</label>
+            <input type="text" id="direccion" class="form-control">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="guardarCambios()">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Hero con imagen a la derecha -->
+<section class="hero container-fluid">
+  <div class="hero-text">
+    <h1>Promociones especiales para tu mascota</h1>
+    <p>Ofrecemos los mejores servicios veterinarios con amor, cuidado y experiencia.</p>
+  </div>
+  <img src="images/fondo-inicio.png" alt="Veterinario con perro">
+</section>
+
+
+  <!-- Línea “Destacado” -->
+  <div class="divider"><span>Destacado</span></div>
+
+  <!-- Sección de íconos -->
+  <section class="features container">
+    <div class="row justify-content-center">
+      <div class="col-md-2 feature-card">
+        <i class="fa-solid fa-shopping-bag"></i>
+        <h5>Productos</h5>
+      </div>
+      <div class="col-md-2 feature-card">
+        <i class="fa-solid fa-user-md"></i>
+        <h5>Especialidades</h5>
+      </div>
+      <div class="col-md-2 feature-card">
+        <i class="fa-solid fa-map-marker-alt"></i>
+        <h5>Locales</h5>
+      </div>
+      <div class="col-md-2 feature-card">
+        <i class="fa-solid fa-clock"></i>
+        <h5>Horarios</h5>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contenido dinámico -->
+  <div class="container my-4">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title mb-3">Tu Información</h3>
+        <div id="user-info" class="text-muted">Cargando tu perfil...</div>
+      </div>
+    </div>
+
+    <div id="mascotas-section-card" class="card" style="display: none;">
+      <div class="card-body">
+        <h3 class="card-title">Tus Mascotas</h3>
+        <div id="mascotas-list" class="mt-3 text-center text-muted">Cargando tus mascotas...</div>
+        <div class="text-center mt-3">
+          <a href="#" class="btn btn-primary" onclick="agregarMascota()">+ Agregar Nueva Mascota</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="rol-restringido" class="text-center text-danger" style="display: none;">
+      <h3>Acceso Restringido</h3>
+      <p>Esta página es solo para dueños. Tu rol es <span id="rol-actual"></span>.</p>
+      <a href="/login" class="btn btn-primary mt-3">Ir a Login</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 PetCare. <a href="#" onclick="verCitas()">Ver mis citas</a></p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    const API_BASE = 'http://localhost:8080/api';
+    const ROL_DUEÑO = 'DUEÑO';
+
+    function showAlert(message, type) {
+      document.querySelectorAll('.alert').forEach(a => a.remove());
+      const alert = document.createElement('div');
+      alert.className = `alert alert-${type} alert-dismissible fade show mt-3`;
+      alert.innerHTML = `${message}<button type="button" class="btn-close" data-bs-dismiss="alert"></button>`;
+      document.querySelector('.container').prepend(alert);
+      setTimeout(() => alert.remove(), 5000);
+    }
+
+    function getAuthHeaders() {
+      return { 'Content-Type': 'application/json' };
+    }
+
+    async function cargarDashboard() {
+      const usuarioStorage = localStorage.getItem('usuario');
+      if (!usuarioStorage) return;
+
+      try {
+        const usuario = JSON.parse(usuarioStorage);
+        if (usuario.rol !== ROL_DUEÑO) {
+          document.getElementById('rol-actual').textContent = usuario.rol;
+          document.getElementById('rol-restringido').style.display = 'block';
+          setTimeout(() => {
+            if (usuario.rol === 'VETERINARIO') window.location.href = '/admin-dashboard';
+            else window.location.href = '/login';
+          }, 3000);
+          return;
+        }
+
+        document.getElementById('user-info').innerHTML = `
+          <p><strong>Nombre:</strong> ${usuario.nombre}</p>
+          <p><strong>Email:</strong> ${usuario.email}</p>
+          <p><strong>Rol:</strong> Dueño de Mascotas</p>
+        `;
+        document.getElementById('mascotas-section-card').style.display = 'block';
+
+        const list = document.getElementById('mascotas-list');
+        if (usuario.mascotas && usuario.mascotas.length > 0) {
+          list.innerHTML = '';
+          usuario.mascotas.forEach(m => {
+            const div = document.createElement('div');
+            div.className = 'border rounded p-2 mb-2';
+            div.innerHTML = `
+              <h6>🐶 ${typeof m === 'string' ? m : m.nombre}</h6>
+              <p>Especie: ${typeof m === 'string' ? 'N/A' : (m.especie || 'No especificada')}</p>
+            `;
+            list.appendChild(div);
+          });
+        } else {
+          list.innerHTML = '<p class="text-muted text-center">No tienes mascotas registradas aún.</p>';
+        }
+
+     //   showAlert('¡Bienvenido!', 'success');
+      } catch (e) {
+        console.error(e);
+        localStorage.removeItem('usuario');
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('usuario');
+      //showAlert('Sesión cerrada.', 'info');
+      setTimeout(() => window.location.href = '/login', 1000);
+    }
+
+    function agregarMascota() {
+      window.location.href = `${API_BASE}/mascotas/nueva`;
+    }
+
+    function verCitas() {
+      window.location.href = `${API_BASE}/citas/mis-citas`;
+    }
+
+    document.addEventListener('DOMContentLoaded', cargarDashboard);
+
+  function abrirModalCuenta() {
+    const usuario = JSON.parse(localStorage.getItem('usuario')) || {};
+    document.getElementById('nombre').value = usuario.nombre || '';
+    document.getElementById('apellido').value = usuario.apellido || '';
+    document.getElementById('telefono').value = usuario.telefono || '';
+    document.getElementById('direccion').value = usuario.direccion || '';
+
+    const modal = new bootstrap.Modal(document.getElementById('modalCuenta'));
+    modal.show();
+  }
+
+  function guardarCambios() {
+    const usuario = JSON.parse(localStorage.getItem('usuario')) || {};
+    usuario.nombre = document.getElementById('nombre').value;
+    usuario.apellido = document.getElementById('apellido').value;
+    usuario.telefono = document.getElementById('telefono').value;
+    usuario.direccion = document.getElementById('direccion').value;
+
+    localStorage.setItem('usuario', JSON.stringify(usuario));
+    showAlert('✅ Datos actualizados correctamente.', 'success');
+    bootstrap.Modal.getInstance(document.getElementById('modalCuenta')).hide();
+
+    cargarDashboard();
+  }
+
+
+  </script>
+
+</body>
+</html>

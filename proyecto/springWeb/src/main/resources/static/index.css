@@ -1,0 +1,138 @@
+/*estilos de logi, registro y recuperacion*/
+:root {
+    --primary-color: #4e73df;
+    --success-color: #1cc88a;
+    --warning-color: #f6c23e;
+    --danger-color: #e74a3b;
+    --vet-green: #2ecc71;
+    --vet-blue: #3498db;
+}
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.sidebar-vet {
+    background: linear-gradient(135deg, var(--vet-green) 0%, var(--vet-blue) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar-vet::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="paw" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M10 5c0-2.8-2.2-5-5-5S0 2.2 0 5c0 1.3 0.5 2.5 1.4 3.4C0.5 9.5 0 10.7 0 12c0 2.8 2.2 5 5 5s5-2.2 5-5c0-1.3-0.5-2.5-1.4-3.4C9.5 7.5 10 6.3 10 5z" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23paw)"/></svg>');
+}
+
+.feature-item {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 15px;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.form-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border-right: none;
+}
+
+.form-control {
+    border-left: none;
+    padding-left: 0;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #ced4da;
+}
+
+.btn {
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Animaciones suaves */
+.form-container {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar-vet {
+        display: none !important;
+    }
+    
+    .form-container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+}
+
+/* Efectos hover para botones sociales */
+.btn-outline-danger:hover, .btn-outline-primary:hover {
+    transform: scale(1.05);
+}
+
+/* Loading states */
+.btn.loading {
+    position: relative;
+    color: transparent;
+}
+
+.btn.loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    margin-left: -10px;
+    margin-top: -10px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s ease-in-out infinite;
+}
+
+/* === Ajuste SOLO para el formulario de registro === */
+#registerForm.form-container {
+  max-width: 420px;           /* ancho igual al login */
+  padding: 1rem;          /* reduce un poco el espacio interno */
+  margin: auto;      
+}
+
+/* Contenedor para centrar verticalmente el registro sin usar toda la pantalla */
+#registerForm {
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-height: 95vh;       
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+    
+}
+
