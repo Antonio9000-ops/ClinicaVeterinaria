@@ -365,18 +365,18 @@ function verCitas() {
 }
 
 
-// Cargar navbar dinámicamente
 fetch("/navbar")
   .then(res => res.text())
   .then(html => {
     document.getElementById("navbar").innerHTML = html;
-    document.addEventListener('DOMContentLoaded', cargarDashboard);
+
+    // Cargar el script del navbar solo después de insertar el HTML
+    const script = document.createElement("script");
+    script.src = "navbar.js";
+    document.body.appendChild(script);
   })
   .catch(err => console.error("Error cargando el navbar:", err));
 </script>
-
-
-
 
 </body>
 </html>
